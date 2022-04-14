@@ -25,33 +25,42 @@ export default {
   name: 'Login',
   data () {
     return {
-      loginForm: {
-        username: 'admin',
-        password: '123'
+      rules: {
+        username: [{required: true, message: '用户名不能为空', trigger: 'blur'}],
+        password: [{required: true, message: '密码不能为空', trigger: 'blur'}]
       },
-      responseResult: []
+      checked: true,
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      loading: false
     }
   },
   methods: {
     login () {
       var _this = this
-      console.log(this.$store.state)
       this.$axios
         .post('/login', {
           username: this.loginForm.username,
           password: this.loginForm.password
         })
-        .then(successResponse => {
-          if (successResponse.data.code === 200) {
+        .then(resp => {
+          if (resp.data.code === 200) {
+            var data = resp.data.result
+            _this.$store.commit('login', data)
+            var path = _this.$route.query.redirect
             // this.$router.replace({path: '/index'})
-            _this.$store.commit('login', _this.loginForm)
-            var path = this.$route.query.redirect
-            this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
+            _this.$router.replace({path: path === '/' || path === undefined ? '/admin' : path})
+          } else {
+            this.$alert(resp.data.message, '提示', {
+              confirmButtonText: '确定'
+            })
           }
         })
-        .catch(failResponse => {
-        })
+        .catch(failResponse => {})
     }
+
   }
 }
 </script>
