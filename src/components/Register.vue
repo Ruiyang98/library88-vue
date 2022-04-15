@@ -56,8 +56,7 @@ export default{
 </script>
 <style>
 #paper {
-  background:url("../assets/Ilyina.jpg") no-repeat;
-  background-position: center;
+  background: url("../assets/Ilyina.jpg") no-repeat center;
   height: 100%;
   width: 100%;
   background-size: cover;
