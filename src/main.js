@@ -26,7 +26,7 @@ router.beforeEach((to, from, next) => {
   // 已登录状态下访问 login 页面直接跳转到后台首页
   if (store.state.username && to.path.startsWith('/login')) {
     next({
-      path: 'admin'
+      name: 'Dashboard'
     })
   }
   // 首先判断访问的路径是否需要被拦截进行登录
@@ -84,6 +84,9 @@ const formatRoutes = (routes) => {
       name: route.name,
       nameZh: route.nameZh,
       iconCls: route.iconCls,
+      meta: {
+        requireAuth: true
+      },
       children: route.children
     }
     fmtRoutes.push(fmtRoute)

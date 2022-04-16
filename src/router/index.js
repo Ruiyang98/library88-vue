@@ -51,6 +51,14 @@ export default new Router({
         requireAuth: true
       },
       children: [
+        {
+          path: '/admin/dashboard',
+          name: 'Dashboard',
+          component: () => import('../components/admin/dashboard/admin/index'),
+          meta: {
+            requireAuth: true
+          }
+        }
       ]
     },
     {
@@ -107,7 +115,14 @@ export const createRouter = routes => new Router({
         requireAuth: true
       },
       children: [
-
+        {
+          path: '/admin/dashboard',
+          name: 'Dashboard',
+          component: () => import('../components/admin/dashboard/admin/index'),
+          meta: {
+            requireAuth: true
+          }
+        }
       ]
     },
     {
