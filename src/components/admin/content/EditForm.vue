@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <i class="el-icon-circle-plus-outline"  @click="dialogFormVisible = true"></i>
+  <div style="text-align: left">
+    <el-button class="add-button" type="success" @click="dialogFormVisible = true">添加图书</el-button>
     <el-dialog
       title="添加/修改图书"
       :visible.sync="dialogFormVisible"
@@ -63,6 +63,7 @@ export default {
         press: '',
         cover: '',
         abs: '',
+        cid: '',
         category: {
           id: '',
           name: ''
@@ -73,6 +74,7 @@ export default {
   },
   methods: {
     clear () {
+      this.$refs.imgUpload.clear()
       this.form = {
         id: '',
         title: '',
@@ -81,15 +83,15 @@ export default {
         press: '',
         cover: '',
         abs: '',
-        category: ''
+        category: {
+          id: '',
+          name: ''
+        }
       }
-    },
-    uploadImg () {
-      this.form.cover = this.$refs.imgUpload.url
     },
     onSubmit () {
       this.$axios
-        .post('/books', {
+        .post('/admin/content/books', {
           id: this.form.id,
           cover: this.form.cover,
           title: this.form.title,
@@ -99,21 +101,21 @@ export default {
           abs: this.form.abs,
           category: this.form.category
         }).then(resp => {
-          if (resp && resp.status === 200) {
+          if (resp && resp.data.code === 200) {
             this.dialogFormVisible = false
             this.$emit('onSubmit')
           }
         })
+    },
+    uploadImg () {
+      this.form.cover = this.$refs.imgUpload.url
     }
   }
 }
 </script>
 
 <style scoped>
-.el-icon-circle-plus-outline {
-  margin: 50px 0 0 20px;
-  font-size: 100px;
-  float: left;
-  cursor: pointer;
+.add-button {
+  margin: 18px 0 0 10px;
 }
 </style>

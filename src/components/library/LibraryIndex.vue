@@ -25,6 +25,8 @@ export default {
       this.$axios.get(url).then(resp => {
         if (resp && resp.status === 200) {
           _this.$refs.booksArea.books = resp.data
+          // 应该是默认打开第一页
+          _this.$refs.booksArea.currentPage = 1
         }
       })
     }

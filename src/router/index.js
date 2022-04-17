@@ -27,6 +27,14 @@ export default new Router({
           component: () => import('../components/home/AppIndex')
         },
         {
+          path: '/admin/content/editor',
+          name: 'Editor',
+          component: () => import('../components/admin/content/ArticleEditor'),
+          meta: {
+            requireAuth: true
+          }
+        },
+        {
           path: '/library',
           name: 'Library',
           component: () => import('../components/library/LibraryIndex')
@@ -89,6 +97,14 @@ export const createRouter = routes => new Router({
           path: '/index',
           name: 'AppIndex',
           component: () => import('../components/home/AppIndex')
+        },
+        {
+          path: '/admin/content/editor',
+          name: 'Editor',
+          component: () => import('../components/admin/content/ArticleEditor'),
+          meta: {
+            requireAuth: true
+          }
         },
         {
           path: '/library',
