@@ -35,6 +35,16 @@ export default new Router({
           }
         },
         {
+          path: '/jotter/article',
+          name: 'Article',
+          component: () => import('../components/jotter/ArticleDetails')
+        },
+        {
+          path: '/jotter',
+          name: 'Jotter',
+          component: () => import('../components/jotter/Articles')
+        },
+        {
           path: '/library',
           name: 'Library',
           component: () => import('../components/library/LibraryIndex')
@@ -105,6 +115,16 @@ export const createRouter = routes => new Router({
           meta: {
             requireAuth: true
           }
+        },
+        {
+          path: '/jotter/article',
+          name: 'Article',
+          component: () => import('../components/jotter/ArticleDetails')
+        },
+        {
+          path: '/jotter',
+          name: 'Jotter',
+          component: () => import('../components/jotter/Articles')
         },
         {
           path: '/library',

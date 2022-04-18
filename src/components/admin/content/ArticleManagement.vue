@@ -125,6 +125,7 @@ export default {
           }
         }
       )
+      // 新窗口打开文章详情页
       window.open(articleUrl.href, '_blank')
     },
     editArticle (article) {

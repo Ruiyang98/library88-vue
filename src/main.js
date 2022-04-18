@@ -6,6 +6,8 @@ import router from './router'
 import ElementUI from 'element-ui'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 
 // 设置反向代理
 var axios = require('axios')
@@ -17,6 +19,7 @@ Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+Vue.use(mavonEditor)
 
 // 使用钩子函数判断是否拦截,在访问每一个路由前调用
 router.beforeEach((to, from, next) => {
@@ -34,15 +37,12 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
     if (store.state.username) {
       axios.get('/authentication').then(resp => {
-        console.log(resp)
-        if (resp.data) {
+        if (resp) {
           next()
         }
       })
     } else {
       next({
-        // 否则跳转到登录页面
-        // 并存储访问的页面路径（以便在登录后跳转到访问页）
         path: 'login',
         query: {redirect: to.fullPath}
       })
